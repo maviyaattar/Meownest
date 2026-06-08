@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Cat | MeowNest</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+>
+<style>
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+--primary:#2563eb;
+--primary-dark:#1d4ed8;
+--bg:#f8fafc;
+--card:#ffffff;
+--text:#111827;
+--gray:#64748b;
+--border:#e5e7eb;
+--shadow:0 10px 25px rgba(0,0,0,.06);
+--radius:18px;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+}
+
+.top-bar{
+position:sticky;
+top:0;
+z-index:1000;
+background:white;
+border-bottom:1px solid var(--border);
+display:flex;
+align-items:center;
+gap:20px;
+padding:18px 5%;
+}
+
+.back-btn{
+text-decoration:none;
+color:var(--text);
+display:flex;
+align-items:center;
+gap:8px;
+font-weight:600;
+}
+
+.back-btn i{
+font-size:20px;
+}
+
+.top-bar h1{
+font-size:1.3rem;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+padding:30px 5% 100px;
+}
+
+#editCatForm{
+background:white;
+border-radius:24px;
+padding:30px;
+box-shadow:var(--shadow);
+}
+
+.form-group{
+margin-bottom:22px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:10px;
+font-weight:600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+width:100%;
+padding:15px;
+border:1px solid var(--border);
+border-radius:14px;
+outline:none;
+font-size:15px;
+background:white;
+transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+border-color:var(--primary);
+box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+
+.form-group textarea{
+resize:none;
+min-height:120px;
+}
+
+.upload-box{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+gap:10px;
+padding:40px 20px;
+border:2px dashed #93c5fd;
+border-radius:20px;
+background:#eff6ff;
+cursor:pointer;
+transition:.3s;
+}
+
+.upload-box:hover{
+border-color:#2563eb;
+background:#dbeafe;
+}
+
+.upload-box i{
+font-size:50px;
+color:#2563eb;
+}
+
+.upload-box h3{
+font-size:18px;
+}
+
+.upload-box p{
+color:#64748b;
+}
+
+.image-preview{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.image-preview img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:14px;
+border:1px solid var(--border);
+box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.checkbox-group{
+display:flex;
+flex-direction:column;
+gap:14px;
+margin-bottom:25px;
+}
+
+.checkbox-group label{
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:500;
+}
+
+.checkbox-group input{
+width:18px;
+height:18px;
+}
+
+#submitBtn{
+width:100%;
+border:none;
+background:var(--primary);
+color:white;
+padding:16px;
+border-radius:14px;
+cursor:pointer;
+font-size:16px;
+font-weight:700;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+transition:.3s;
+}
+
+#submitBtn:hover{
+background:var(--primary-dark);
+}
+
+#submitBtn:disabled{
+opacity:.7;
+cursor:not-allowed;
+}
+
+#submitBtn i{
+font-size:20px;
+}
+
+#statusText{
+margin-top:18px;
+text-align:center;
+font-weight:600;
+color:var(--gray);
+}
+
+@media(max-width:768px){
+
+.top-bar{
+padding:15px 5%;
+}
+
+.top-bar h1{
+font-size:1.1rem;
+}
+
+#editCatForm{
+padding:22px;
+}
+
+.image-preview{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+    
+</style>
+</head>
+
+<body>
+
+<header class="top-bar">
+
+<a
+href="my-cats.html"
+class="back-btn"
+>
+
+<i class="ri-arrow-left-line"></i>
+
+Back
+
+</a>
+
+<h1>
+
+Edit Cat
+
+</h1>
+
+</header>
+
+<main class="container">
+
+<form id="editCatForm">
+
+<div class="form-group">
+
+<label>
+
+Cat Photos
+
+</label>
+
+<input
+type="file"
+id="catImages"
+multiple
+accept="image/*"
+>
+
+</div>
+
+<div
+id="imagePreview"
+class="image-preview"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Cat Name
+
+</label>
+
+<input
+type="text"
+id="catName"
+required
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Breed
+
+</label>
+
+<input
+type="text"
+id="catBreed"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Age
+
+</label>
+
+<input
+type="number"
+id="catAge"
+min="0"
+step="0.1"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Gender
+
+</label>
+
+<select id="catGender">
+
+<option value="">
+Select Gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Color
+
+</label>
+
+<input
+type="text"
+id="catColor"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+City
+
+</label>
+
+<input
+type="text"
+id="catCity"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Description
+
+</label>
+
+<textarea
+id="catDescription"
+></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Rescue Story
+
+</label>
+
+<textarea
+id="catStory"
+></textarea>
+
+</div>
+
+<div class="checkbox-group">
+
+<label>
+
+<input
+type="checkbox"
+id="vaccinated"
+>
+
+Vaccinated
+
+</label>
+
+<label>
+
+<input
+type="checkbox"
+id="friendlyKids"
+>
+
+Friendly With Kids
+
+</label>
+
+<label>
+
+<input
+type="checkbox"
+id="friendlyPets"
+>
+
+Friendly With Pets
+
+</label>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Indoor / Outdoor
+
+</label>
+
+<select id="indoorOutdoor">
+
+<option value="">
+Select
+</option>
+
+<option value="Indoor">
+Indoor
+</option>
+
+<option value="Outdoor">
+Outdoor
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+Status
+
+</label>
+
+<select id="catStatus">
+
+<option value="available">
+Available
+</option>
+
+<option value="adopted">
+Adopted
+</option>
+
+</select>
+
+</div>
+
+<button
+type="submit"
+id="submitBtn"
+>
+
+<i class="ri-save-line"></i>
+
+<span id="btnText">
+
+Update Cat
+
+</span>
+
+</button>
+
+<div id="statusText">
+
+</div>
+
+</form>
+
+</main>
+<script>
+    const API =
+"https://meownest-backend.onrender.com";
+
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+window.location.href =
+"index.html";
+
+}
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const catId =
+params.get("id");
+
+if(!catId){
+
+window.location.href =
+"my-cats.html";
+
+}
+function renderImages(){
+
+imagePreview.innerHTML = "";
+
+imageUrls.forEach((url,index)=>{
+
+imagePreview.innerHTML += `
+
+<div class="image-box">
+
+<img
+src="${url}"
+alt="Cat Image"
+>
+
+<button
+type="button"
+class="remove-image"
+onclick="removeImage(${index})"
+>
+
+✕
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function removeImage(index){
+
+imageUrls.splice(index,1);
+
+renderImages();
+
+}
+
+/* =========================
+ELEMENTS
+========================= */
+
+const form =
+document.getElementById(
+"editCatForm"
+);
+
+const imageInput =
+document.getElementById(
+"catImages"
+);
+
+const imagePreview =
+document.getElementById(
+"imagePreview"
+);
+
+const submitBtn =
+document.getElementById(
+"submitBtn"
+);
+
+const btnText =
+document.getElementById(
+"btnText"
+);
+
+const statusText =
+document.getElementById(
+"statusText"
+);
+
+/* =========================
+IMAGES
+========================= */
+
+let imageUrls = [];
+
+/* =========================
+UPLOAD IMAGE
+========================= */
+
+async function uploadImage(file){
+
+const formData =
+new FormData();
+
+formData.append(
+"image",
+file
+);
+
+const response =
+await fetch(
+
+`${API}/api/upload`,
+
+{
+method:"POST",
+
+headers:{
+Authorization:
+`Bearer ${token}`
+},
+
+body:formData
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.message
+);
+
+}
+
+return data.imageUrl;
+
+}
+
+/* =========================
+LOAD CAT
+========================= */
+
+async function loadCat(){
+
+try{
+
+const response =
+await fetch(
+`${API}/api/cats/${catId}`
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+showshowshowAlert(
+"Cat not found"
+);
+
+window.location.href =
+"my-cats.html";
+
+return;
+
+}
+
+const cat =
+data.cat;
+
+imageUrls =
+cat.images || [];
+
+/* IMAGE PREVIEW */
+
+renderImages();
+
+/* FILL FORM */
+
+document.getElementById(
+"catName"
+).value =
+cat.name || "";
+
+document.getElementById(
+"catBreed"
+).value =
+cat.breed || "";
+
+document.getElementById(
+"catAge"
+).value =
+cat.age || "";
+
+document.getElementById(
+"catGender"
+).value =
+cat.gender || "";
+
+document.getElementById(
+"catColor"
+).value =
+cat.color || "";
+
+document.getElementById(
+"catCity"
+).value =
+cat.city || "";
+
+document.getElementById(
+"catDescription"
+).value =
+cat.description || "";
+
+document.getElementById(
+"catStory"
+).value =
+cat.story || "";
+
+document.getElementById(
+"vaccinated"
+).checked =
+cat.vaccinated || false;
+
+document.getElementById(
+"friendlyKids"
+).checked =
+cat.friendlyWithKids || false;
+
+document.getElementById(
+"friendlyPets"
+).checked =
+cat.friendlyWithPets || false;
+
+document.getElementById(
+"indoorOutdoor"
+).value =
+cat.indoorOutdoor || "";
+
+document.getElementById(
+"catStatus"
+).value =
+cat.status || "available";
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+"Failed to load cat"
+);
+
+}
+
+}
+
+/* =========================
+NEW IMAGE SELECT
+========================= */
+
+imageInput.addEventListener(
+"change",
+async ()=>{
+
+try{
+
+statusText.textContent =
+"Uploading images...";
+
+for(const file of imageInput.files){
+
+const url =
+await uploadImage(file);
+
+imageUrls.push(url);
+
+}
+
+renderImages();
+
+statusText.textContent =
+"Images uploaded successfully";
+
+}catch(error){
+
+console.log(error);
+
+showAlert(error.message);
+
+}
+
+}
+);
+
+statusText.textContent =
+"Images uploaded";
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+error.message
+);
+
+}
+
+}
+);
+
+/* =========================
+UPDATE CAT
+========================= */
+
+form.addEventListener(
+"submit",
+async (e)=>{
+
+e.preventDefault();
+
+try{
+
+submitBtn.disabled = true;
+
+btnText.textContent =
+"Updating...";
+
+statusText.textContent =
+"Saving changes...";
+
+const response =
+await fetch(
+
+`${API}/api/cats/${catId}`,
+
+{
+method:"PUT",
+
+headers:{
+"Content-Type":
+"application/json",
+
+Authorization:
+`Bearer ${token}`
+},
+
+body:JSON.stringify({
+
+name:
+document.getElementById(
+"catName"
+).value,
+
+breed:
+document.getElementById(
+"catBreed"
+).value,
+
+age:Number(
+document.getElementById(
+"catAge"
+).value
+),
+
+gender:
+document.getElementById(
+"catGender"
+).value,
+
+color:
+document.getElementById(
+"catColor"
+).value,
+
+city:
+document.getElementById(
+"catCity"
+).value,
+
+description:
+document.getElementById(
+"catDescription"
+).value,
+
+story:
+document.getElementById(
+"catStory"
+).value,
+
+vaccinated:
+document.getElementById(
+"vaccinated"
+).checked,
+
+friendlyWithKids:
+document.getElementById(
+"friendlyKids"
+).checked,
+
+friendlyWithPets:
+document.getElementById(
+"friendlyPets"
+).checked,
+
+indoorOutdoor:
+document.getElementById(
+"indoorOutdoor"
+).value,
+
+status:
+document.getElementById(
+"catStatus"
+).value,
+
+images:
+imageUrls
+
+})
+
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.message
+);
+
+}
+
+statusText.textContent =
+"✅ Cat updated successfully";
+
+setTimeout(()=>{
+
+window.location.href =
+"my-cats.html";
+
+},1200);
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+error.message
+);
+
+}finally{
+
+submitBtn.disabled = false;
+
+btnText.textContent =
+"Update Cat";
+
+}
+
+}
+);
+
+/* =========================
+START
+========================= */
+
+loadCat();
+</script>
+<script src="ban.js"></script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+
+
+</body>
+
+</html>

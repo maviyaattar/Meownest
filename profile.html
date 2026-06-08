@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | MeowNest</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+>
+<style>
+    
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#111827;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+    --radius:18px;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* ======================
+   TOP BAR
+====================== */
+
+.top-bar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:18px 5%;
+}
+
+.back-btn{
+    text-decoration:none;
+    color:var(--text);
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-weight:600;
+}
+
+.back-btn i{
+    font-size:20px;
+}
+
+.top-bar h1{
+    font-size:1.3rem;
+}
+
+/* ======================
+   CONTAINER
+====================== */
+
+.container{
+    max-width:800px;
+    margin:auto;
+    padding:30px 5% 120px;
+}
+
+/* ======================
+   PROFILE CARD
+====================== */
+
+.profile-card{
+    background:white;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.avatar-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+#profileAvatar{
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #dbeafe;
+
+    margin-bottom:15px;
+}
+
+.avatar-btn{
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.avatar-btn:hover{
+    background:#dbeafe;
+}
+
+.profile-info{
+    margin-top:20px;
+}
+
+.profile-info h2{
+    margin-bottom:8px;
+}
+
+.profile-info p{
+    color:var(--gray);
+}
+
+/* ======================
+   STATS
+====================== */
+
+.stats-section{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-card h3{
+    color:var(--primary);
+
+    font-size:2rem;
+
+    margin-bottom:6px;
+}
+
+.stat-card p{
+    color:var(--gray);
+}
+
+/* ======================
+   FORM
+====================== */
+
+#profileForm{
+    background:white;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:15px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.1);
+}
+
+.form-group textarea{
+    min-height:120px;
+
+    resize:none;
+}
+
+/* ======================
+   SAVE BUTTON
+====================== */
+
+#saveBtn{
+    width:100%;
+
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    transition:.3s;
+}
+
+#saveBtn:hover{
+    background:var(--primary-dark);
+}
+
+#saveBtn i{
+    font-size:20px;
+}
+
+/* ======================
+   STATUS
+====================== */
+
+#statusText{
+    margin-top:18px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    color:var(--gray);
+}
+
+/* ======================
+   LOGOUT
+====================== */
+
+.account-actions{
+    margin-top:20px;
+}
+
+#logoutBtn{
+    width:100%;
+
+    border:none;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    transition:.3s;
+}
+
+#logoutBtn:hover{
+    background:#fecaca;
+}
+
+
+/* ======================
+   PROFILE MENU
+====================== */
+
+.profile-menu-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:white;
+
+padding:16px 20px;
+
+border-radius:16px;
+
+box-shadow:var(--shadow);
+
+text-decoration:none;
+
+color:var(--text);
+
+margin-bottom:15px;
+
+transition:.3s;
+
+}
+
+.profile-menu-item:hover{
+
+transform:translateY(-2px);
+
+}
+
+.menu-left{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.menu-left i{
+
+font-size:22px;
+
+color:var(--primary);
+
+}
+
+.profile-menu-item .ri-arrow-right-s-line{
+
+font-size:22px;
+
+color:var(--gray);
+
+}
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:768px){
+
+    .top-bar{
+        padding:15px 5%;
+    }
+
+    .top-bar h1{
+        font-size:1.1rem;
+    }
+
+    .profile-card,
+    #profileForm{
+        padding:22px;
+    }
+
+    .stats-section{
+        grid-template-columns:1fr;
+    }
+
+    #profileAvatar{
+        width:110px;
+        height:110px;
+    }
+
+}
+    
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<header class="top-bar">
+
+<a
+href="dashboard.html"
+class="back-btn"
+>
+
+<i class="ri-arrow-left-line"></i>
+
+Back
+
+</a>
+
+<h1>
+My Profile
+</h1>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="container">
+
+<!-- PROFILE CARD -->
+
+<section class="profile-card">
+
+<div class="avatar-section">
+
+<img
+id="profileAvatar"
+src=""
+alt="Profile"
+>
+
+<label
+for="avatarInput"
+class="avatar-btn"
+>
+
+<i class="ri-camera-line"></i>
+
+Change Photo
+
+</label>
+
+<input
+type="file"
+id="avatarInput"
+accept="image/*"
+hidden
+>
+
+</div>
+
+<div class="profile-info">
+
+<h2 id="profileDisplayName">
+
+Loading...
+
+</h2>
+
+<p id="profileEmail">
+
+Loading...
+
+</p>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats-section">
+
+<div class="stat-card">
+
+<h3 id="catsPosted">
+
+0
+
+</h3>
+
+<p>
+Cats Posted
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3 id="successfulAdoptions">
+
+0
+
+</h3>
+
+<p>
+Adoptions
+</p>
+
+</div>
+
+</section>
+
+<!-- PROFILE FORM -->
+
+<form id="profileForm">
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Phone Number
+</label>
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+WhatsApp Number
+</label>
+
+<input
+type="text"
+id="whatsapp"
+placeholder="WhatsApp Number"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+City
+</label>
+
+<input
+type="text"
+id="city"
+placeholder="City"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Bio
+</label>
+
+<textarea
+id="bio"
+placeholder="Tell something about yourself..."
+></textarea>
+
+</div>
+
+<button
+type="submit"
+id="saveBtn"
+>
+
+<i class="ri-save-line"></i>
+
+<span id="btnText">
+
+Save Profile
+
+</span>
+
+</button>
+
+<div id="statusText">
+
+</div>
+
+</form>
+
+<section class="account-actions">
+
+<a
+href="my-cats.html"
+class="profile-menu-item"
+>
+
+<div class="menu-left">
+
+<i class="ri-paw-line"></i>
+
+<span>My Cats</span>
+
+</div>
+
+<i class="ri-arrow-right-s-line"></i>
+
+</a>
+
+<a
+href="favorites.html"
+class="profile-menu-item"
+>
+
+<div class="menu-left">
+
+<i class="ri-heart-3-line"></i>
+
+<span>Favorites</span>
+
+</div>
+
+<i class="ri-arrow-right-s-line"></i>
+
+</a>
+
+<button id="logoutBtn">
+
+<i class="ri-logout-box-r-line"></i>
+
+Logout
+
+</button>
+
+</section>
+
+</main>
+<script>
+
+const API =
+"https://meownest-backend.onrender.com";
+
+const token =
+localStorage.getItem("token");
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+if(!token){
+
+window.location.href =
+"index.html";
+
+}
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const profileAvatar =
+document.getElementById(
+"profileAvatar"
+);
+
+const avatarInput =
+document.getElementById(
+"avatarInput"
+);
+
+const profileDisplayName =
+document.getElementById(
+"profileDisplayName"
+);
+
+const profileEmail =
+document.getElementById(
+"profileEmail"
+);
+
+const catsPosted =
+document.getElementById(
+"catsPosted"
+);
+
+const successfulAdoptions =
+document.getElementById(
+"successfulAdoptions"
+);
+
+const profileForm =
+document.getElementById(
+"profileForm"
+);
+
+const saveBtn =
+document.getElementById(
+"saveBtn"
+);
+
+const btnText =
+document.getElementById(
+"btnText"
+);
+
+const statusText =
+document.getElementById(
+"statusText"
+);
+
+const logoutBtn =
+document.getElementById(
+"logoutBtn"
+);
+
+/* =========================
+   CURRENT AVATAR
+========================= */
+
+let avatarUrl = "";
+
+/* =========================
+   LOAD PROFILE
+========================= */
+
+async function loadProfile(){
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/auth/profile`,
+
+{
+headers:{
+Authorization:
+`Bearer ${token}`
+}
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+const user =
+data.user;
+
+profileDisplayName.textContent =
+user.name;
+
+profileEmail.textContent =
+user.email;
+
+document.getElementById(
+"name"
+).value =
+user.name || "";
+
+document.getElementById(
+"phone"
+).value =
+user.phone || "";
+
+document.getElementById(
+"whatsapp"
+).value =
+user.whatsapp || "";
+
+document.getElementById(
+"city"
+).value =
+user.city || "";
+
+document.getElementById(
+"bio"
+).value =
+user.bio || "";
+
+catsPosted.textContent =
+user.catsPosted || 0;
+
+successfulAdoptions.textContent =
+user.successfulAdoptions || 0;
+
+avatarUrl =
+user.avatar || "";
+
+profileAvatar.src =
+avatarUrl ||
+`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`;
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+"Failed to load profile"
+);
+
+}
+
+}
+
+/* =========================
+   UPLOAD IMAGE
+========================= */
+
+async function uploadImage(file){
+
+const formData =
+new FormData();
+
+formData.append(
+"image",
+file
+);
+
+const response =
+await fetch(
+
+`${API}/api/upload`,
+
+{
+method:"POST",
+
+headers:{
+Authorization:
+`Bearer ${token}`
+},
+
+body:formData
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.message
+);
+
+}
+
+return data.imageUrl;
+
+}
+
+/* =========================
+   CHANGE AVATAR
+========================= */
+
+avatarInput.addEventListener(
+"change",
+async ()=>{
+
+try{
+
+const file =
+avatarInput.files[0];
+
+if(!file) return;
+
+statusText.textContent =
+"Uploading photo...";
+
+avatarUrl =
+await uploadImage(file);
+
+profileAvatar.src =
+avatarUrl;
+
+statusText.textContent =
+"Photo uploaded";
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+error.message
+);
+
+}
+
+}
+);
+
+/* =========================
+   SAVE PROFILE
+========================= */
+
+profileForm.addEventListener(
+"submit",
+async (e)=>{
+
+e.preventDefault();
+
+try{
+
+saveBtn.disabled = true;
+
+btnText.textContent =
+"Saving...";
+
+statusText.textContent =
+"Updating profile...";
+
+const response =
+await fetch(
+
+`${API}/api/auth/profile`,
+
+{
+method:"PUT",
+
+headers:{
+"Content-Type":
+"application/json",
+
+Authorization:
+`Bearer ${token}`
+},
+
+body:JSON.stringify({
+
+name:
+document.getElementById(
+"name"
+).value,
+
+avatar:
+avatarUrl,
+
+phone:
+document.getElementById(
+"phone"
+).value,
+
+whatsapp:
+document.getElementById(
+"whatsapp"
+).value,
+
+city:
+document.getElementById(
+"city"
+).value,
+
+bio:
+document.getElementById(
+"bio"
+).value
+
+})
+
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.message
+);
+
+}
+
+statusText.textContent =
+"✅ Profile updated successfully";
+
+profileDisplayName.textContent =
+data.user.name;
+
+}catch(error){
+
+console.log(error);
+
+statusText.textContent =
+error.message;
+
+showAlert(
+error.message
+);
+
+}finally{
+
+saveBtn.disabled = false;
+
+btnText.textContent =
+"Save Profile";
+
+}
+
+}
+);
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.onclick = ()=>{
+
+localStorage.removeItem(
+"token"
+);
+
+localStorage.removeItem(
+"user"
+);
+
+window.location.href =
+"index.html";
+
+};
+
+/* =========================
+   START
+========================= */
+
+loadProfile();
+
+</script>
+
+<script src="ban.js"></script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+</body>
+
+</html>

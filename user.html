@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>User Profile | MeowNest</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+>
+
+
+<style>
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+--primary:#2563eb;
+--primary-dark:#1d4ed8;
+--bg:#f8fafc;
+--card:#ffffff;
+--text:#111827;
+--gray:#64748b;
+--border:#e5e7eb;
+--shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+}
+
+.top-bar{
+position:sticky;
+top:0;
+z-index:1000;
+
+background:white;
+
+padding:18px 5%;
+
+border-bottom:1px solid var(--border);
+
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.back-btn{
+text-decoration:none;
+color:var(--text);
+
+display:flex;
+align-items:center;
+gap:8px;
+
+font-weight:600;
+}
+
+.back-btn i{
+font-size:22px;
+}
+
+.container{
+max-width:800px;
+margin:auto;
+padding:25px 5% 80px;
+}
+
+.profile-card{
+background:white;
+
+border-radius:24px;
+
+padding:30px;
+
+text-align:center;
+
+box-shadow:var(--shadow);
+
+margin-bottom:20px;
+}
+
+#userAvatar{
+width:130px;
+height:130px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:5px solid #dbeafe;
+
+margin-bottom:15px;
+}
+
+#userName{
+margin-bottom:6px;
+}
+
+#userUsername{
+color:var(--gray);
+margin-bottom:15px;
+}
+
+.user-meta{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.user-meta span{
+background:#eff6ff;
+color:#2563eb;
+
+padding:8px 14px;
+
+border-radius:999px;
+
+font-size:14px;
+font-weight:600;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-bottom:20px;
+}
+
+.stat-card{
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:var(--shadow);
+}
+
+.stat-card h3{
+font-size:2rem;
+color:var(--primary);
+margin-bottom:8px;
+}
+
+.stat-card p{
+color:var(--gray);
+}
+
+.info-card,
+.contact-card{
+background:white;
+
+padding:22px;
+
+border-radius:20px;
+
+box-shadow:var(--shadow);
+
+margin-bottom:20px;
+}
+
+.info-card h3,
+.contact-card h3{
+display:flex;
+align-items:center;
+gap:10px;
+
+margin-bottom:15px;
+}
+
+.info-card p{
+color:var(--gray);
+line-height:1.8;
+}
+
+.contact-buttons{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.contact-buttons button{
+border:none;
+
+padding:14px;
+
+border-radius:14px;
+
+cursor:pointer;
+
+font-weight:600;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+#callBtn{
+background:#dbeafe;
+color:#2563eb;
+}
+
+#whatsappBtn{
+background:#dcfce7;
+color:#15803d;
+}
+
+@media(max-width:768px){
+
+.stats-grid{
+grid-template-columns:1fr;
+}
+
+.contact-buttons{
+grid-template-columns:1fr;
+}
+
+#userAvatar{
+width:110px;
+height:110px;
+}
+
+}
+    
+</style>
+
+</head>
+
+<body>
+
+<header class="top-bar">
+
+<a
+href="javascript:history.back()"
+class="back-btn"
+>
+
+<i class="ri-arrow-left-line"></i>
+
+Back
+
+</a>
+
+<h1>
+
+User Profile
+
+</h1>
+
+</header>
+
+<main class="container">
+
+<!-- PROFILE CARD -->
+
+<section class="profile-card">
+
+<img
+id="userAvatar"
+src=""
+alt="User"
+>
+
+<h2 id="userName">
+
+Loading...
+
+</h2>
+
+<p id="userUsername">
+
+@username
+
+</p>
+
+<div class="user-meta">
+
+<span id="userCity">
+
+City
+
+</span>
+
+<span id="userVerified">
+
+Not Verified
+
+</span>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats-grid">
+
+<div class="stat-card">
+
+<h3 id="catsPosted">
+
+0
+
+</h3>
+
+<p>
+
+Cats Posted
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3 id="successfulAdoptions">
+
+0
+
+</h3>
+
+<p>
+
+Successful Adoptions
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="info-card">
+
+<h3>
+
+<i class="ri-user-3-line"></i>
+
+About
+
+</h3>
+
+<p id="userBio">
+
+No bio available
+
+</p>
+
+</section>
+
+
+
+
+<!-- CONTACT -->
+
+<section class="contact-card">
+
+<h3>
+
+<i class="ri-phone-line"></i>
+
+Contact Owner
+
+</h3>
+
+<div class="contact-buttons">
+
+<button id="callBtn">
+
+<i class="ri-phone-line"></i>
+
+Call
+
+</button>
+
+<button id="whatsappBtn">
+
+<i class="ri-whatsapp-line"></i>
+
+WhatsApp
+
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+<script>
+    const API =
+"https://meownest-backend.onrender.com";
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const userId =
+params.get("id");
+
+if(!userId){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+/* =========================
+ELEMENTS
+========================= */
+
+const userAvatar =
+document.getElementById(
+"userAvatar"
+);
+
+const userName =
+document.getElementById(
+"userName"
+);
+
+const userUsername =
+document.getElementById(
+"userUsername"
+);
+
+const userCity =
+document.getElementById(
+"userCity"
+);
+
+const userVerified =
+document.getElementById(
+"userVerified"
+);
+
+const userBio =
+document.getElementById(
+"userBio"
+);
+
+const memberSince =
+document.getElementById(
+"memberSince"
+);
+
+const catsPosted =
+document.getElementById(
+"catsPosted"
+);
+
+const successfulAdoptions =
+document.getElementById(
+"successfulAdoptions"
+);
+
+const callBtn =
+document.getElementById(
+"callBtn"
+);
+
+const whatsappBtn =
+document.getElementById(
+"whatsappBtn"
+);
+
+let phone = "";
+let whatsapp = "";
+
+/* =========================
+LOAD USER
+========================= */
+
+async function loadUser(){
+
+try{
+
+const response =
+await fetch(
+`${API}/api/users/${userId}`
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+showshowAlert(
+"User not found"
+);
+
+window.location.href =
+"dashboard.html";
+
+return;
+
+}
+
+const user =
+data.user;
+
+userAvatar.src =
+user.avatar ||
+`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`;
+
+userName.textContent =
+user.name || "Unknown User";
+
+userUsername.textContent =
+"@" + (
+user.username ||
+"user"
+);
+
+userCity.textContent =
+user.city || "Unknown City";
+
+userVerified.textContent =
+user.verified
+? "Verified"
+: "Not Verified";
+
+userBio.textContent =
+user.bio ||
+"No bio available";
+
+catsPosted.textContent =
+user.catsPosted || 0;
+
+successfulAdoptions.textContent =
+user.successfulAdoptions || 0;
+
+memberSince.textContent =
+new Date(
+user.createdAt
+).toLocaleDateString();
+
+phone =
+user.phone || "";
+
+whatsapp =
+user.whatsapp || "";
+
+}catch(error){
+
+console.log(error);
+
+showshowAlert(
+"Failed to load profile"
+);
+
+}
+
+}
+
+/* =========================
+CALL
+========================= */
+
+callBtn.onclick = ()=>{
+
+if(!phone){
+
+showshowAlert(
+"Phone number not available"
+);
+
+return;
+
+}
+
+window.location.href =
+`tel:${phone}`;
+
+};
+
+/* =========================
+WHATSAPP
+========================= */
+
+whatsappBtn.onclick = ()=>{
+
+if(!whatsapp){
+
+showshowAlert(
+"WhatsApp not available"
+);
+
+return;
+
+}
+
+window.open(
+`https://wa.me/${whatsapp}`,
+"_blank"
+);
+
+};
+
+/* =========================
+START
+========================= */
+
+loadUser();
+</script>
+
+<script src="ban.js"></script>
+
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+</body>
+
+</html>

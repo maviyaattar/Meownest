@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cat Details | MeowNest</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+        rel="stylesheet"
+    >
+
+<style>
+    
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#111827;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+    --radius:18px;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* ======================
+   TOP BAR
+====================== */
+
+.top-bar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:white;
+
+    padding:18px 5%;
+
+    border-bottom:1px solid var(--border);
+}
+
+.back-btn{
+    text-decoration:none;
+    color:var(--text);
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    font-weight:600;
+}
+
+.back-btn i{
+    font-size:20px;
+}
+
+/* ======================
+   PAGE
+====================== */
+
+.cat-page{
+    max-width:900px;
+    margin:auto;
+    padding:25px 5% 120px;
+}
+
+/* ======================
+   IMAGE
+====================== */
+
+.cat-image-section{
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    margin-bottom:25px;
+}
+
+#catImage{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    display:block;
+}
+
+#thumbnailContainer{
+
+display:flex;
+
+gap:12px;
+
+padding:15px;
+
+overflow-x:auto;
+
+background:white;
+
+border-top:1px solid var(--border);
+
+}
+
+#thumbnailContainer img{
+
+width:90px;
+height:90px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+cursor:pointer;
+
+border:2px solid transparent;
+
+transition:.3s;
+
+flex-shrink:0;
+
+}
+
+#thumbnailContainer img:hover{
+
+border-color:#2563eb;
+
+}
+
+.active-thumb{
+
+border-color:#2563eb !important;
+
+}
+/* ======================
+   CAT INFO
+====================== */
+
+.cat-info{
+    margin-bottom:25px;
+}
+
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.title-row h1{
+    font-size:2rem;
+}
+
+#catStatus{
+    background:#dcfce7;
+    color:#166534;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+    font-weight:700;
+}
+
+.cat-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.cat-tags span{
+    background:#eff6ff;
+    color:#1d4ed8;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.cat-location{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--gray);
+}
+
+
+.views-badge{
+
+display:inline-flex;
+align-items:center;
+gap:8px;
+
+margin-top:12px;
+
+background:#eff6ff;
+color:#2563eb;
+
+padding:10px 16px;
+
+border-radius:999px;
+
+font-size:14px;
+font-weight:600;
+
+}
+/* ======================
+   CARDS
+====================== */
+
+.info-card,
+.owner-card{
+    background:white;
+
+    border-radius:20px;
+
+    padding:22px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:20px;
+}
+
+.info-card h2,
+.owner-card h2{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:15px;
+
+    font-size:1.1rem;
+}
+
+.info-card p{
+    color:var(--gray);
+    line-height:1.8;
+}
+
+/* ======================
+   DETAILS
+====================== */
+
+.details-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.detail-item{
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:15px;
+}
+
+.detail-item span{
+    display:block;
+    color:var(--gray);
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.detail-item strong{
+    font-size:15px;
+}
+
+/* ======================
+   OWNER
+====================== */
+
+.owner-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+#ownerAvatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #dbeafe;
+}
+
+#ownerName{
+    margin-bottom:4px;
+}
+
+#ownerCity{
+    color:var(--gray);
+}
+
+/* ======================
+   ACTION BUTTONS
+====================== */
+
+.action-buttons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.action-buttons button{
+    border:none;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    transition:.3s;
+}
+
+#favoriteBtn{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+#callBtn{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+#whatsappBtn{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.action-buttons button:hover{
+    transform:translateY(-2px);
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:768px){
+
+    #catImage{
+        height:280px;
+    }
+
+    .title-row{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .action-buttons{
+        grid-template-columns:1fr;
+    }
+
+    .details-grid{
+        grid-template-columns:1fr;
+    }
+
+    .title-row h1{
+        font-size:1.6rem;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <header class="top-bar">
+
+        <a href="dashboard.html" class="back-btn">
+
+            <i class="ri-arrow-left-line"></i>
+
+            Back
+
+        </a>
+
+    </header>
+
+    <!-- CAT DETAILS -->
+
+    <main class="cat-page">
+
+        <!-- IMAGE -->
+
+     <section class="cat-image-section">
+
+    <img
+        id="catImage"
+        src=""
+        alt="Cat"
+    >
+
+    <div id="thumbnailContainer">
+
+    </div>
+
+</section>
+
+        <!-- BASIC INFO -->
+
+        <section class="cat-info">
+
+            <div class="title-row">
+
+                <h1 id="catName">
+                    Loading...
+                </h1>
+
+                <span id="catStatus">
+                    Available
+                </span>
+
+            </div>
+
+            <div class="cat-tags">
+
+                <span id="catBreed">
+                    Breed
+                </span>
+
+                <span id="catGender">
+                    Gender
+                </span>
+
+                <span id="catAge">
+                    Age
+                </span>
+
+            </div>
+
+     <div class="cat-location">
+
+<i class="ri-map-pin-line"></i>
+
+<span id="catCity">
+City
+</span>
+
+</div>
+
+<div class="views-badge">
+
+<i class="ri-eye-line"></i>
+
+<span id="viewCount">
+0
+</span>
+
+Views
+
+</div>
+
+                <span id="catCity">
+                    City
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- DESCRIPTION -->
+
+        <section class="info-card">
+
+            <h2>
+
+                <i class="ri-file-text-line"></i>
+
+                Description
+
+            </h2>
+
+            <p id="catDescription">
+
+                Loading...
+
+            </p>
+
+        </section>
+
+        <!-- STORY -->
+
+        <section class="info-card">
+
+            <h2>
+
+                <i class="ri-book-open-line"></i>
+
+                Rescue Story
+
+            </h2>
+
+            <p id="catStory">
+
+                Loading...
+
+            </p>
+
+        </section>
+
+        <!-- DETAILS -->
+
+        <section class="info-card">
+
+            <h2>
+
+                <i class="ri-information-line"></i>
+
+                Details
+
+            </h2>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>Color</span>
+
+                    <strong id="catColor">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Vaccinated</span>
+
+                    <strong id="catVaccinated">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Kids Friendly</span>
+
+                    <strong id="catKids">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Pet Friendly</span>
+
+                    <strong id="catPets">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- OWNER -->
+
+<section
+class="owner-card"
+id="ownerCard"
+style="
+cursor:pointer;
+transition:.3s;
+"
+onclick="
+if(!localStorage.getItem('token')){
+alert('Please login first');
+window.location.href='index.html';
+return;
+}
+
+if(this.dataset.userid){
+window.location.href='user.html?id='+this.dataset.userid;
+}
+"
+onmouseover="
+this.style.transform='translateY(-3px)';
+"
+onmouseout="
+this.style.transform='translateY(0)';
+"
+>
+
+            <h2>
+
+                <i class="ri-user-line"></i>
+
+                Owner Information
+
+            </h2>
+
+            <div class="owner-box">
+
+                <img
+                    id="ownerAvatar"
+                    src=""
+                    alt="Owner"
+                >
+
+                <div>
+
+                    <h3 id="ownerName">
+
+                        Owner Name
+
+                    </h3>
+
+                    <p id="ownerCity">
+
+                        City
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ACTION BUTTONS -->
+
+        <section class="action-buttons">
+
+            <button id="favoriteBtn">
+
+                <i class="ri-heart-line"></i>
+
+                Add To Favorites
+
+            </button>
+
+            <button id="callBtn">
+
+                <i class="ri-phone-line"></i>
+
+                Call Owner
+
+            </button>
+
+            <button id="whatsappBtn">
+
+                <i class="ri-whatsapp-line"></i>
+
+                WhatsApp Owner
+
+            </button>
+            <button id="reportBtn">
+
+    <i class="ri-flag-line"></i>
+
+    Report Cat
+
+</button>
+
+        </section>
+
+    </main>
+    
+<script>
+
+const API = "https://meownest-backend.onrender.com";
+
+const token = localStorage.getItem("token");
+
+/* =========================
+   GET CAT ID
+========================= */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const catId =
+params.get("id");
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const catImage =
+document.getElementById("catImage");
+
+const thumbnailContainer =
+document.getElementById(
+"thumbnailContainer"
+);
+
+const catName =
+document.getElementById("catName");
+
+const catStatus =
+document.getElementById("catStatus");
+
+const catBreed =
+document.getElementById("catBreed");
+
+const catGender =
+document.getElementById("catGender");
+
+const catAge =
+document.getElementById("catAge");
+
+const catCity =
+document.getElementById("catCity");
+
+const viewCount =
+document.getElementById("viewCount");
+
+
+const catDescription =
+document.getElementById("catDescription");
+
+const catStory =
+document.getElementById("catStory");
+
+const catColor =
+document.getElementById("catColor");
+
+const catVaccinated =
+document.getElementById("catVaccinated");
+
+const catKids =
+document.getElementById("catKids");
+
+const catPets =
+document.getElementById("catPets");
+
+const ownerAvatar =
+document.getElementById("ownerAvatar");
+
+const ownerName =
+document.getElementById("ownerName");
+        
+const ownerCity =
+document.getElementById("ownerCity");
+
+const favoriteBtn =
+document.getElementById("favoriteBtn");
+
+const callBtn =
+document.getElementById("callBtn");
+
+const whatsappBtn =
+document.getElementById("whatsappBtn");
+
+const reportBtn =
+document.getElementById("reportBtn");
+
+
+
+
+
+/* GUEST MODE */
+
+if(!token){
+
+favoriteBtn.style.display = "none";
+
+reportBtn.style.display = "none";
+
+}
+
+/* =========================
+   OWNER DATA
+========================= */
+
+let ownerPhone = "";
+let ownerWhatsapp = "";
+
+/* =========================
+   LOAD CAT
+========================= */
+
+async function loadCat(){
+
+try{
+
+const response =
+await fetch(
+`${API}/api/cats/${catId}`
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+showAlert("Cat not found");
+
+window.location.href =
+"dashboard.html";
+
+return;
+
+}
+
+const cat = data.cat;
+
+/* IMAGE */
+
+if(
+cat.images &&
+cat.images.length > 0
+){
+
+catImage.src =
+cat.images[0];
+
+thumbnailContainer.innerHTML = "";
+
+cat.images.forEach(
+(image,index)=>{
+
+thumbnailContainer.innerHTML += `
+
+<img
+src="${image}"
+class="${
+index===0
+?
+'active-thumb'
+:
+''
+}"
+onclick="
+changeImage(
+'${image}',
+this
+)
+"
+>
+
+`;
+
+}
+);
+
+}else{
+
+catImage.src =
+"https://placehold.co/800x500?text=MeowNest";
+
+}
+
+/* CAT INFO */
+
+catName.textContent =
+cat.name;
+
+catStatus.textContent =
+cat.status;
+
+catBreed.textContent =
+cat.breed || "Unknown";
+
+catGender.textContent =
+cat.gender || "Unknown";
+
+catAge.textContent =
+`${cat.age || 0} Years`;
+
+catCity.textContent =
+cat.city || "Unknown";
+
+viewCount.textContent =
+cat.views || 0;
+
+
+/* DESCRIPTION */
+
+catDescription.textContent =
+cat.description ||
+"No description available.";
+
+/* STORY */
+
+catStory.textContent =
+cat.story ||
+"No rescue story available.";
+
+/* DETAILS */
+
+catColor.textContent =
+cat.color || "-";
+
+catVaccinated.textContent =
+cat.vaccinated
+? "Yes"
+: "No";
+
+catKids.textContent =
+cat.friendlyWithKids
+? "Yes"
+: "No";
+
+catPets.textContent =
+cat.friendlyWithPets
+? "Yes"
+: "No";
+
+/* OWNER */
+
+ownerName.textContent =
+cat.ownerId.name;
+
+document
+.getElementById("ownerCard")
+.dataset.userid =
+cat.ownerId._id;
+
+ownerCity.textContent =
+cat.ownerId.city ||
+"Unknown";
+
+ownerPhone =
+cat.ownerId.phone || "";
+
+ownerWhatsapp =
+cat.ownerId.whatsapp || "";
+
+ownerAvatar.src =
+cat.ownerId.avatar ||
+"https://ui-avatars.com/api/?name=" +
+encodeURIComponent(
+cat.ownerId.name
+);
+
+}catch(error){
+
+console.log(error);
+
+showAlert("Failed to load cat");
+
+}
+
+}
+
+/* =========================
+   ADD TO FAVORITES
+========================= */
+
+if(token){
+
+favoriteBtn.onclick = async ()=>{
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/favorites/${catId}`,
+
+{
+method:"POST",
+headers:{
+Authorization:
+`Bearer ${token}`
+}
+}
+
+);
+
+const data =
+await response.json();
+
+alert(
+data.message ||
+"Added to favorites ❤️"
+);
+
+}catch(error){
+
+console.log(error);
+
+alert(
+"Failed to add favorite"
+);
+
+}
+
+};
+
+}
+
+/* =========================
+   CALL OWNER
+========================= */
+
+callBtn.onclick = ()=>{
+
+if(!token){
+
+alert(
+"Please login first"
+);
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+if(!ownerPhone){
+
+alert(
+"Phone number not available"
+);
+
+return;
+
+}
+
+window.location.href =
+`tel:${ownerPhone}`;
+
+};
+
+
+
+/* =========================
+   WHATSAPP OWNER
+========================= */
+
+whatsappBtn.onclick = ()=>{
+
+if(!token){
+
+alert(
+"Please login first"
+);
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+if(!ownerWhatsapp){
+
+alert(
+"WhatsApp not available"
+);
+
+return;
+
+}
+
+window.open(
+`https://wa.me/${ownerWhatsapp}`,
+"_blank"
+);
+
+};
+
+
+/* =========================
+   REPORT CAT
+========================= */
+
+reportBtn.onclick = ()=>{
+
+if(!token){
+
+alert(
+"Please login to report cats"
+);
+
+window.location.href =
+"index.html";
+
+return;
+
+}
+
+window.location.href =
+`report.html?catId=${catId}`;
+
+};
+
+/* =========================
+   START
+========================= */
+
+if(!catId){
+
+window.location.href =
+"dashboard.html";
+
+}else{
+
+loadCat();
+
+}
+
+</script>
+<script src="ban.js"></script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+</body>
+
+</html>

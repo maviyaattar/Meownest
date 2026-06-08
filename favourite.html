@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Favorites | MeowNest</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+>
+<style>
+    *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+--primary:#2563eb;
+--bg:#f8fafc;
+--card:#ffffff;
+--text:#111827;
+--gray:#64748b;
+--border:#e5e7eb;
+--shadow:0 10px 25px rgba(0,0,0,.06);
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+padding-bottom:90px;
+}
+
+.top-bar{
+position:sticky;
+top:0;
+z-index:1000;
+
+background:white;
+
+padding:18px 5%;
+
+border-bottom:1px solid var(--border);
+
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.back-btn{
+text-decoration:none;
+color:var(--text);
+
+display:flex;
+align-items:center;
+gap:8px;
+
+font-weight:600;
+}
+
+.back-btn i{
+font-size:22px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:25px 5%;
+}
+
+.page-header{
+margin-bottom:25px;
+}
+
+.page-header h2{
+margin-bottom:8px;
+}
+
+.page-header p{
+color:var(--gray);
+}
+
+.favorites-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fill,minmax(280px,1fr));
+
+gap:20px;
+}
+
+.cat-card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:var(--shadow);
+}
+
+.cat-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+display:block;
+}
+
+.cat-content{
+padding:18px;
+}
+
+.cat-content h3{
+margin-bottom:8px;
+}
+
+.cat-content p{
+color:var(--gray);
+margin-bottom:8px;
+}
+
+.card-actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.card-actions button{
+flex:1;
+
+border:none;
+
+padding:12px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-weight:600;
+}
+
+.view-btn{
+background:#dbeafe;
+color:#2563eb;
+}
+
+.remove-btn{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.empty-state{
+text-align:center;
+padding:80px 20px;
+}
+
+.empty-state i{
+font-size:80px;
+color:#cbd5e1;
+}
+
+.empty-state h3{
+margin:20px 0 10px;
+}
+
+.empty-state p{
+color:var(--gray);
+margin-bottom:20px;
+}
+
+.browse-btn{
+display:inline-block;
+
+text-decoration:none;
+
+background:#2563eb;
+color:white;
+
+padding:14px 20px;
+
+border-radius:14px;
+}
+
+.mobile-nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+
+height:70px;
+
+background:white;
+
+border-top:1px solid var(--border);
+
+display:flex;
+justify-content:space-around;
+align-items:center;
+}
+
+.mobile-nav a{
+color:#64748b;
+font-size:24px;
+text-decoration:none;
+}
+
+.mobile-nav .active{
+color:#2563eb;
+}
+
+@media(max-width:768px){
+
+.favorites-grid{
+grid-template-columns:1fr;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<header class="top-bar">
+
+    <a
+    href="dashboard.html"
+    class="back-btn"
+    >
+
+        <i class="ri-arrow-left-line"></i>
+
+        Back
+
+    </a>
+
+    <h1>
+
+        My Favorites
+
+    </h1>
+
+</header>
+
+<!-- PAGE -->
+
+<main class="container">
+
+    <div class="page-header">
+
+        <h2>
+
+            Favorite Cats ❤️
+
+        </h2>
+
+        <p>
+
+            Cats you saved for later.
+
+        </p>
+
+    </div>
+
+    <!-- FAVORITES GRID -->
+
+    <div
+    id="favoritesContainer"
+    class="favorites-grid"
+    >
+
+    </div>
+
+    <!-- EMPTY STATE -->
+
+    <div
+    id="emptyState"
+    class="empty-state"
+    style="display:none;"
+    >
+
+        <i class="ri-heart-line"></i>
+
+        <h3>
+
+            No Favorites Yet
+
+        </h3>
+
+        <p>
+
+            Start exploring cats and add them to favorites.
+
+        </p>
+
+        <a
+        href="dashboard.html"
+        class="browse-btn"
+        >
+
+            Browse Cats
+
+        </a>
+
+    </div>
+
+</main>
+
+<!-- MOBILE NAV -->
+
+<nav class="mobile-nav">
+
+    <a href="dashboard.html">
+
+        <i class="ri-home-5-line"></i>
+
+    </a>
+
+    <a href="add-cat.html">
+
+        <i class="ri-add-circle-line"></i>
+
+    </a>
+
+    <a
+    href="favorites.html"
+    class="active"
+    >
+
+        <i class="ri-heart-3-fill"></i>
+
+    </a>
+
+    <a href="profile.html">
+
+        <i class="ri-user-3-line"></i>
+
+    </a>
+
+</nav>
+<script>
+    const API =
+"https://meownest-backend.onrender.com";
+
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+window.location.href =
+"index.html";
+
+}
+
+const favoritesContainer =
+document.getElementById(
+"favoritesContainer"
+);
+
+const emptyState =
+document.getElementById(
+"emptyState"
+);
+
+/* =========================
+LOAD FAVORITES
+========================= */
+
+async function loadFavorites(){
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/favorites`,
+
+{
+headers:{
+Authorization:
+`Bearer ${token}`
+}
+}
+
+);
+
+const data =
+await response.json();
+
+if(
+!data.success ||
+data.count === 0
+){
+
+favoritesContainer.style.display =
+"none";
+
+emptyState.style.display =
+"block";
+
+return;
+
+}
+
+favoritesContainer.innerHTML = "";
+
+data.favorites.forEach(
+favorite=>{
+
+const cat =
+favorite.catId;
+
+favoritesContainer.innerHTML += `
+
+<div class="cat-card">
+
+<img
+src="${
+cat.images?.[0] ||
+'https://placehold.co/500x300?text=Cat'
+}"
+>
+
+<div class="cat-content">
+
+<h3>
+${cat.name}
+</h3>
+
+<p>
+🐾 ${cat.breed || "Unknown Breed"}
+</p>
+
+<p>
+📍 ${cat.city || "Unknown City"}
+</p>
+
+<div class="card-actions">
+
+<button
+class="view-btn"
+onclick="
+viewCat(
+'${cat._id}'
+)
+"
+>
+
+View
+
+</button>
+
+<button
+class="remove-btn"
+onclick="
+removeFavorite(
+'${cat._id}'
+)
+"
+>
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+);
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+"Failed to load favorites"
+);
+
+}
+
+}
+
+/* =========================
+VIEW CAT
+========================= */
+
+function viewCat(id){
+
+window.location.href =
+`cat.html?id=${id}`;
+
+}
+
+/* =========================
+REMOVE FAVORITE
+========================= */
+
+async function removeFavorite(id){
+
+const confirmRemove =
+confirm(
+"Remove from favorites?"
+);
+
+if(!confirmRemove){
+
+return;
+
+}
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/favorites/${id}`,
+
+{
+method:"DELETE",
+
+headers:{
+Authorization:
+`Bearer ${token}`
+}
+}
+
+);
+
+const data =
+await response.json();
+
+showAlert(
+data.message
+);
+
+loadFavorites();
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+"Failed to remove favorite"
+);
+
+}
+
+}
+
+/* =========================
+START
+========================= */
+
+loadFavorites();
+</script>
+
+<script src="ban.js"></script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+
+</body>
+
+</html>

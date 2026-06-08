@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MeowNest Dashboard</title>
+
+    <!-- Remix Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+        rel="stylesheet"
+    >
+    <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#111827;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+    --radius:18px;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+/* ======================
+   NAVBAR
+====================== */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 6%;
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:1.3rem;
+    font-weight:800;
+}
+
+.logo i{
+    color:var(--primary);
+    font-size:1.4rem;
+}
+
+.desktop-nav{
+    display:flex;
+    gap:30px;
+}
+
+.desktop-nav a{
+    text-decoration:none;
+    color:var(--gray);
+    font-weight:600;
+    transition:.3s;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a.active{
+    color:var(--primary);
+}
+
+.profile-section{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.profile-section img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #dbeafe;
+}
+
+.profile-section span{
+    font-weight:600;
+}
+
+/* ======================
+   WELCOME
+====================== */
+
+.welcome-section{
+    padding:40px 6% 20px;
+}
+
+.welcome-content h1{
+    font-size:2.2rem;
+    margin-bottom:8px;
+}
+
+.welcome-content p{
+    color:var(--gray);
+}
+
+/* ======================
+   SEARCH
+====================== */
+
+.search-section{
+    padding:0 6% 25px;
+}
+
+.search-box{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:16px 18px;
+
+    box-shadow:var(--shadow);
+}
+
+.search-box i{
+    color:var(--gray);
+    font-size:1.1rem;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    width:100%;
+    background:none;
+    font-size:15px;
+}
+
+/* ======================
+   FEED HEADER
+====================== */
+
+.feed-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 6% 20px;
+}
+
+.feed-header h2{
+    font-size:1.5rem;
+}
+
+.feed-header button{
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:10px 16px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+/* ======================
+   CATS GRID
+====================== */
+
+.cats-section{
+    padding:0 6%;
+}
+
+.cats-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:22px;
+}
+
+/* ======================
+   CAT CARD
+====================== */
+
+.cat-card{
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+}
+
+.cat-card:hover{
+    transform:translateY(-4px);
+}
+
+.cat-image{
+    width:100%;
+    height:220px;
+
+    background:#f1f5f9;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.cat-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.cat-content{
+    padding:18px;
+}
+
+.cat-content h3{
+    margin-bottom:8px;
+    font-size:1.2rem;
+}
+
+.cat-content p{
+    color:var(--gray);
+    margin-bottom:10px;
+}
+
+.cat-meta{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.cat-meta span{
+    background:#eff6ff;
+    color:#1d4ed8;
+
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    font-size:12px;
+}
+
+.view-btn{
+    width:100%;
+
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+/* ======================
+   MOBILE NAV
+====================== */
+
+.mobile-nav{
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    background:white;
+
+    border-top:1px solid var(--border);
+
+    display:none;
+
+    justify-content:space-around;
+
+    padding:12px 0;
+
+    z-index:999;
+}
+
+.mobile-nav a{
+    text-decoration:none;
+
+    color:var(--gray);
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:4px;
+
+    font-size:12px;
+}
+
+.mobile-nav i{
+    font-size:22px;
+}
+
+.mobile-nav a.active{
+    color:var(--primary);
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:900px){
+
+    .desktop-nav{
+        display:none;
+    }
+
+    .mobile-nav{
+        display:flex;
+    }
+
+    .profile-section span{
+        display:none;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .welcome-content h1{
+        font-size:1.8rem;
+    }
+
+    .feed-header{
+        flex-direction:column;
+        gap:12px;
+        align-items:flex-start;
+    }
+
+    .navbar{
+        padding:15px 5%;
+    }
+
+    .welcome-section,
+    .search-section,
+    .feed-header,
+    .cats-section{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+        <i class="ri-bear-smile-line"></i>  <span>MeowNest</span>
+
+        </div>
+
+        <nav class="desktop-nav">
+
+            <a href="#" class="active">
+                Home
+            </a>
+
+            <a href="add-cat.html">
+                Add Cat
+            </a>
+
+            <a href="my-cats.html">
+                My Cats
+            </a>
+
+            <a href="favorites.html">
+                Favorites
+            </a>
+
+        </nav>
+
+        <div class="profile-section">
+
+            <img
+                id="userAvatar"
+                src="https://ui-avatars.com/api/?name=User"
+                alt="Profile"
+            >
+
+            <span id="userName">
+                User
+            </span>
+
+        </div>
+
+    </header>
+
+    <!-- WELCOME -->
+
+    <section class="welcome-section">
+
+        <div class="welcome-content">
+<h1 id="welcomeTitle">
+    Welcome Back
+</h1>
+
+            <p>
+                Discover loving cats waiting for a forever home.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- SEARCH -->
+
+    <section class="search-section">
+
+        <div class="search-box">
+
+            <i class="ri-search-line"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search cats by name, breed or city..."
+            >
+
+        </div>
+
+    </section>
+
+    <!-- FEED HEADER -->
+
+    <section class="feed-header">
+
+        <h2>
+            Available Cats
+        </h2>
+
+        <button id="refreshBtn">
+
+            <i class="ri-refresh-line"></i>
+
+            Refresh
+
+        </button>
+
+    </section>
+
+    <!-- CATS GRID -->
+
+    <section class="cats-section">
+
+        <div
+            id="catsContainer"
+            class="cats-grid"
+        >
+
+        </div>
+
+    </section>
+
+    <!-- MOBILE BOTTOM NAV -->
+
+    <nav class="mobile-nav">
+
+        <a href="#" class="active">
+
+            <i class="ri-home-5-line"></i>
+
+            <span>Home</span>
+
+        </a>
+
+        <a href="add-cat.html">
+
+            <i class="ri-add-circle-line"></i>
+
+            <span>Add</span>
+
+        </a>
+
+        <a href="favorites.html">
+
+            <i class="ri-heart-3-line"></i>
+
+            <span>Favorites</span>
+
+        </a>
+
+        <a href="profile.html">
+
+            <i class="ri-user-3-line"></i>
+
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+    <script>
+        
+        const API = "https://meownest-backend.onrender.com";
+
+/* =========================
+   AUTH CHECK
+========================= */
+
+const token = localStorage.getItem("token");
+
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const userName =
+document.getElementById("userName");
+
+const userAvatar =
+document.getElementById("userAvatar");
+
+const catsContainer =
+document.getElementById("catsContainer");
+
+const searchInput =
+document.getElementById("searchInput");
+
+const refreshBtn =
+document.getElementById("refreshBtn");
+
+
+const welcomeTitle =
+document.getElementById("welcomeTitle");
+
+/* =========================
+   LOAD PROFILE
+========================= */
+
+async function loadProfile(){
+
+    try{
+
+        const response =
+        await fetch(
+            `${API}/api/auth/profile`,
+            {
+                headers:{
+                    Authorization:
+                    `Bearer ${token}`
+                }
+            }
+        );
+
+        const data =
+        await response.json();
+
+        if(!data.success){
+            return;
+        }
+
+        userName.textContent =
+        data.user.name;
+
+        if(data.user.avatar){
+
+            userAvatar.src =
+            data.user.avatar;
+
+        }
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+/* =========================
+   LOAD CATS
+========================= */
+
+async function loadCats(){
+
+    try{
+
+        catsContainer.innerHTML =
+        "<p>Loading cats...</p>";
+
+        const response =
+        await fetch(
+            `${API}/api/cats`
+        );
+
+        const data =
+        await response.json();
+        
+
+        catsContainer.innerHTML = "";
+
+        if(data.cats.length === 0){
+
+            catsContainer.innerHTML = `
+            <p>No cats found.</p>
+            `;
+
+            return;
+        }
+
+        data.cats.forEach(cat=>{
+
+            catsContainer.innerHTML += `
+
+            <div class="cat-card">
+
+                <div class="cat-image">
+
+                    ${
+                        cat.images &&
+                        cat.images.length > 0
+
+                        ?
+
+                        `<img src="${cat.images[0]}">`
+
+                        :
+
+                        `<div style="
+                        font-size:80px;
+                        ">
+                        🐱
+                        </div>`
+                    }
+
+                </div>
+
+                <div class="cat-content">
+
+                    <h3>
+                        ${cat.name}
+                    </h3>
+
+                    <p>
+                        ${cat.breed || "Unknown Breed"}
+                    </p>
+
+                    <div class="cat-meta">
+
+                        <span>
+                            ${cat.gender || "Unknown"}
+                        </span>
+
+                        <span>
+                            ${cat.age || 0} Years
+                        </span>
+                        
+                     <span>
+    <i class="ri-eye-line"></i>
+    ${cat.views || 0}
+</span>
+
+                    </div>
+
+                    <p>
+                        📍 ${cat.city || "Unknown"}
+                    </p>
+
+                    <button
+                    class="view-btn"
+                    onclick="
+                    viewCat(
+                    '${cat._id}'
+                    )
+                    "
+                    >
+                    View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+searchInput.addEventListener(
+"keyup",
+async ()=>{
+
+    const query =
+    searchInput.value.trim();
+
+    if(query === ""){
+
+        loadCats();
+        return;
+
+    }
+
+    try{
+
+        const response =
+        await fetch(
+        `${API}/api/search?q=${query}`
+        );
+
+        const data =
+        await response.json();
+
+        catsContainer.innerHTML = "";
+
+        data.cats.forEach(cat=>{
+
+            catsContainer.innerHTML += `
+
+            <div class="cat-card">
+
+                <div class="cat-image">
+
+                    ${
+                        cat.images &&
+                        cat.images.length > 0
+
+                        ?
+
+                        `<img src="${cat.images[0]}">`
+
+                        :
+
+                        `<div style="
+                        font-size:80px;
+                        ">
+                        🐱
+                        </div>`
+                    }
+
+                </div>
+
+                <div class="cat-content">
+
+                    <h3>
+                        ${cat.name}
+                    </h3>
+
+                    <p>
+                        ${cat.breed}
+                    </p>
+<div class="cat-meta">
+
+<span>
+${cat.gender || "Unknown"}
+</span>
+
+<span>
+${cat.age || 0} Years
+</span>
+
+<span>
+👁️ ${cat.views || 0}
+</span>
+
+</div>
+
+<p>
+📍 ${cat.city || "Unknown"}
+</p>
+                    <button
+                    class="view-btn"
+                    onclick="
+                    viewCat(
+                    '${cat._id}'
+                    )
+                    "
+                    >
+                    View Details
+                    </button>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+});
+
+/* =========================
+   VIEW CAT
+========================= */
+
+function viewCat(id){
+
+    localStorage.setItem(
+    "selectedCat",
+    id
+    );
+
+    window.location.href =
+    `cat.html?id=${id}`;
+
+}
+
+/* =========================
+   REFRESH
+========================= */
+
+refreshBtn.onclick = ()=>{
+
+    loadCats();
+
+};
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout(){
+
+    localStorage.removeItem(
+    "token"
+    );
+
+    localStorage.removeItem(
+    "user"
+    );
+
+    window.location.href =
+    "index.html";
+
+}
+
+/* =========================
+   PROTECTED LINKS
+========================= */
+
+document
+.querySelectorAll(
+'a[href="add-cat.html"],a[href="my-cats.html"],a[href="favorites.html"],a[href="profile.html"]'
+)
+.forEach(link=>{
+
+link.addEventListener(
+"click",
+function(e){
+
+if(!token){
+
+e.preventDefault();
+
+alert(
+"Please login first"
+);
+
+window.location.href =
+"index.html";
+
+}
+
+});
+
+});
+/* =========================
+   START
+========================= */
+
+if(token){
+
+    loadProfile();
+
+}else{
+
+    userName.textContent =
+    "Guest";
+
+    userAvatar.src =
+    "https://ui-avatars.com/api/?name=Guest";
+
+    welcomeTitle.textContent =
+    "Welcome To MeowNest";
+
+    document.querySelector(
+    ".desktop-nav"
+    ).innerHTML = `
+    <a href="#" class="active">Home</a>
+    <a href="index.html">Login</a>
+    `;
+
+    document.querySelector(
+    ".mobile-nav"
+    ).innerHTML = `
+    <a href="#" class="active">
+    <i class="ri-home-5-line"></i>
+    <span>Home</span>
+    </a>
+
+    <a href="index.html">
+    <i class="ri-login-box-line"></i>
+    <span>Login</span>
+    </a>
+    `;
+}
+
+loadCats();
+    </script>
+    
+    <script src="ban.js"></script>
+    <div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+
+</body>
+
+</html>

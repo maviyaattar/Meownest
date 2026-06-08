@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Report Cat | MeowNest</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+rel="stylesheet"
+>
+<style>
+    
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#111827;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --shadow:0 10px 25px rgba(0,0,0,.06);
+    --radius:18px;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* ======================
+   TOP BAR
+====================== */
+
+.top-bar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:18px 5%;
+}
+
+.back-btn{
+    text-decoration:none;
+    color:var(--text);
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-weight:600;
+}
+
+.back-btn i{
+    font-size:20px;
+}
+
+.top-bar h1{
+    font-size:1.3rem;
+}
+
+/* ======================
+   CONTAINER
+====================== */
+
+.container{
+    max-width:700px;
+    margin:auto;
+    padding:30px 5% 100px;
+}
+
+/* ======================
+   CAT CARD
+====================== */
+
+.cat-card{
+    background:white;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:25px;
+}
+
+#catImage{
+    width:100%;
+    height:260px;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.cat-info{
+    padding:20px;
+}
+
+.cat-info h2{
+    margin-bottom:10px;
+}
+
+.cat-info p{
+    color:var(--gray);
+    margin-bottom:6px;
+}
+
+/* ======================
+   REPORT FORM
+====================== */
+
+#reportForm{
+    background:white;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    box-shadow:var(--shadow);
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+}
+
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    padding:15px;
+
+    outline:none;
+
+    font-size:15px;
+
+    background:white;
+
+    transition:.3s;
+}
+
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.1);
+}
+
+.form-group textarea{
+    resize:none;
+    min-height:140px;
+}
+
+/* ======================
+   SUBMIT BUTTON
+====================== */
+
+#submitBtn{
+    width:100%;
+
+    border:none;
+
+    background:#dc2626;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:16px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    transition:.3s;
+}
+
+#submitBtn:hover{
+    background:#b91c1c;
+}
+
+#submitBtn i{
+    font-size:20px;
+}
+
+/* ======================
+   STATUS
+====================== */
+
+#statusText{
+    margin-top:18px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    color:var(--gray);
+}
+
+/* ======================
+   WARNING BOX
+====================== */
+
+.warning-box{
+    background:#fef2f2;
+
+    border:1px solid #fecaca;
+
+    color:#991b1b;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:768px){
+
+    .top-bar{
+        padding:15px 5%;
+    }
+
+    .top-bar h1{
+        font-size:1.1rem;
+    }
+
+    #catImage{
+        height:220px;
+    }
+
+    #reportForm{
+        padding:22px;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<header class="top-bar">
+
+<a
+href="javascript:history.back()"
+class="back-btn"
+>
+
+<i class="ri-arrow-left-line"></i>
+
+Back
+
+</a>
+
+<h1>
+Report Cat
+</h1>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="container">
+
+<!-- CAT INFO CARD -->
+
+<section class="cat-card">
+
+<img
+id="catImage"
+src=""
+alt="Cat"
+>
+
+<div class="cat-info">
+
+<h2 id="catName">
+Loading...
+</h2>
+
+<p id="ownerName">
+Owner
+</p>
+
+<p id="catCity">
+City
+</p>
+
+</div>
+
+</section>
+
+<!-- REPORT FORM -->
+
+<form id="reportForm">
+
+<div class="form-group">
+
+<label>
+Reason
+</label>
+
+<select id="reason" required>
+
+<option value="">
+Select Reason
+</option>
+
+<option value="Fake Listing">
+Fake Listing
+</option>
+
+<option value="Spam">
+Spam
+</option>
+
+<option value="Animal Abuse">
+Animal Abuse
+</option>
+
+<option value="Wrong Information">
+Wrong Information
+</option>
+
+<option value="Scam">
+Scam
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>
+Description
+</label>
+
+<textarea
+id="description"
+placeholder="Explain the issue..."
+required
+></textarea>
+
+</div>
+
+<button
+type="submit"
+id="submitBtn"
+>
+
+<i class="ri-flag-line"></i>
+
+<span id="btnText">
+Submit Report
+</span>
+
+</button>
+
+<div id="statusText">
+
+</div>
+
+</form>
+
+</main>
+<script>
+    
+
+const API =
+"https://meownest-backend.onrender.com";
+
+const token =
+localStorage.getItem("token");
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+if(!token){
+
+alert(
+"Please login first"
+);
+
+window.location.href =
+"index.html";
+
+}
+
+/* =========================
+   GET CAT ID
+========================= */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const catId =
+params.get("catId");
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const catImage =
+document.getElementById(
+"catImage"
+);
+
+const catName =
+document.getElementById(
+"catName"
+);
+
+const ownerName =
+document.getElementById(
+"ownerName"
+);
+
+const catCity =
+document.getElementById(
+"catCity"
+);
+
+const reportForm =
+document.getElementById(
+"reportForm"
+);
+
+const submitBtn =
+document.getElementById(
+"submitBtn"
+);
+
+const btnText =
+document.getElementById(
+"btnText"
+);
+
+const statusText =
+document.getElementById(
+"statusText"
+);
+
+/* =========================
+   LOAD CAT DETAILS
+========================= */
+
+async function loadCat(){
+
+try{
+
+const response =
+await fetch(
+`${API}/api/cats/${catId}`
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+alert(
+"Cat not found"
+);
+
+window.location.href =
+"dashboard.html";
+
+return;
+
+}
+
+const cat =
+data.cat;
+
+catImage.src =
+cat.images?.[0]
+||
+"https://placehold.co/800x500?text=MeowNest";
+
+catName.textContent =
+cat.name;
+
+ownerName.textContent =
+"Owner: " +
+cat.ownerId.name;
+
+catCity.textContent =
+"📍 " +
+(
+cat.city ||
+"Unknown City"
+);
+
+}catch(error){
+
+console.log(error);
+
+alert(
+"Failed to load cat"
+);
+
+}
+
+}
+
+/* =========================
+   SUBMIT REPORT
+========================= */
+
+reportForm.addEventListener(
+"submit",
+async (e)=>{
+
+e.preventDefault();
+
+try{
+
+submitBtn.disabled = true;
+
+btnText.textContent =
+"Submitting...";
+
+statusText.textContent =
+"Sending report...";
+
+const reason =
+document.getElementById(
+"reason"
+).value;
+
+const description =
+document.getElementById(
+"description"
+).value;
+
+const response =
+await fetch(
+
+`${API}/api/reports`,
+
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json",
+
+Authorization:
+`Bearer ${token}`
+},
+
+body:JSON.stringify({
+
+targetType:"cat",
+
+targetId:catId,
+
+reason:
+`${reason} - ${description}`
+
+})
+
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.message
+);
+
+}
+
+statusText.textContent =
+"✅ Report submitted successfully";
+
+setTimeout(()=>{
+
+window.location.href =
+"dashboard.html";
+
+},1500);
+
+}catch(error){
+
+console.log(error);
+
+statusText.textContent =
+error.message;
+
+alert(
+error.message
+);
+
+}finally{
+
+submitBtn.disabled = false;
+
+btnText.textContent =
+"Submit Report";
+
+}
+
+}
+);
+
+/* =========================
+   START
+========================= */
+
+if(!catId){
+
+window.location.href =
+"dashboard.html";
+
+}else{
+
+loadCat();
+
+}
+
+</script>
+
+<script src="ban.js"></script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+</body>
+
+</html>

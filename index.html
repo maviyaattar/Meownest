@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MeowNest - Find Your New Best Friend</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --bg:#f8fafc;
+    --white:#ffffff;
+    --text:#111827;
+    --gray:#64748b;
+    --border:#e5e7eb;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(10px);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 6%;
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-size:1.5rem;
+    font-weight:800;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+.login-btn{
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.login-btn:hover{
+    background:var(--primary-dark);
+}
+
+/* HERO */
+
+.hero{
+    min-height:85vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:60px;
+
+    padding:80px 6%;
+}
+
+.hero-content{
+    flex:1;
+}
+
+.hero-badge{
+    display:inline-block;
+
+    background:#dbeafe;
+    color:#1e40af;
+
+    padding:10px 18px;
+
+    border-radius:50px;
+
+    font-size:.9rem;
+    font-weight:600;
+
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:4rem;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    color:var(--gray);
+    font-size:1.1rem;
+    line-height:1.8;
+    max-width:600px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:14px 26px;
+    border-radius:14px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.primary-btn{
+    border:none;
+    background:var(--primary);
+    color:white;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+    background:white;
+}
+
+.hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.cat-circle{
+    width:320px;
+    height:320px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:120px;
+
+    box-shadow:var(--shadow);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    padding:0 6% 80px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:var(--radius);
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.stat-card h2{
+    color:var(--primary);
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+/* SECTIONS */
+
+.features,
+.latest-cats,
+.how-it-works,
+.cta{
+    padding:90px 6%;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-heading h2{
+    font-size:2.4rem;
+    margin-bottom:15px;
+}
+
+.section-heading p{
+    color:var(--gray);
+}
+
+/* FEATURES */
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.feature-card{
+    background:white;
+    border-radius:var(--radius);
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.feature-icon{
+    font-size:2.5rem;
+    margin-bottom:15px;
+}
+
+.feature-card h3{
+    margin-bottom:12px;
+}
+
+.feature-card p{
+    color:var(--gray);
+}
+
+/* CATS */
+
+.cats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.cat-card{
+    background:white;
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.cat-photo{
+    height:220px;
+
+    background:#f1f5f9;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:70px;
+}
+
+.cat-content{
+    padding:20px;
+}
+
+.cat-content h3{
+    margin-bottom:8px;
+}
+
+.cat-content p{
+    color:var(--gray);
+    margin-bottom:15px;
+}
+
+.cat-content button{
+    width:100%;
+
+    border:none;
+
+    background:var(--primary);
+    color:white;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+}
+
+/* STEPS */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.step-card{
+    background:white;
+
+    padding:35px;
+
+    border-radius:var(--radius);
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.step-card h3{
+    font-size:3rem;
+    color:var(--primary);
+}
+
+/* CTA */
+
+.cta{
+    text-align:center;
+}
+
+.cta h2{
+    font-size:2.7rem;
+    margin-bottom:15px;
+}
+
+.cta p{
+    color:var(--gray);
+    margin-bottom:25px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111827;
+    color:white;
+
+    text-align:center;
+
+    padding:60px 20px;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+footer p{
+    margin-bottom:10px;
+    opacity:.8;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.modal-content{
+    width:95%;
+    max-width:450px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:15px;
+
+    border:none;
+    background:none;
+
+    font-size:1.3rem;
+    cursor:pointer;
+}
+
+.auth-tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.auth-tabs button{
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    background:#f1f5f9;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+
+#sendOtpBtn{
+background:#16a34a !important;
+white-space:nowrap;
+}
+
+#sendOtpBtn:hover{
+background:#15803d !important;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .stats,
+    .feature-grid,
+    .steps{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:2.8rem;
+    }
+
+    .cat-circle{
+        width:220px;
+        height:220px;
+        font-size:90px;
+    }
+
+    .section-heading h2{
+        font-size:2rem;
+    }
+
+    .cta h2{
+        font-size:2rem;
+    }
+
+}
+
+/* =========================
+   PREMIUM AUTH MODAL
+========================= */
+
+.modal-content{
+    width:95%;
+    max-width:450px;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    position:relative;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.12);
+
+    animation:popup .25s ease;
+}
+
+.auth-header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.auth-logo{
+    width:80px;
+    height:80px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:42px;
+
+    background:#eff6ff;
+
+    border-radius:50%;
+
+    margin-bottom:15px;
+}
+
+.auth-header h2{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.auth-header p{
+    color:#64748b;
+}
+
+.auth-tabs{
+    display:flex;
+    gap:10px;
+
+    background:#f8fafc;
+
+    padding:6px;
+
+    border-radius:14px;
+
+    margin-bottom:25px;
+}
+
+.auth-tabs button{
+    flex:1;
+
+    border:none;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:transparent;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.auth-tabs .active{
+    background:white;
+    color:#2563eb;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+#authForm{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+#authForm input{
+    padding:15px 18px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    outline:none;
+}
+
+#authForm input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+#authForm button{
+
+    margin-top:5px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+#authForm button:hover{
+
+    transform:translateY(-2px);
+
+    background:#1d4ed8;
+
+}
+
+.auth-divider{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    margin:15px 0;
+
+    position:relative;
+
+}
+
+.auth-divider::before,
+.auth-divider::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    width:35%;
+
+    height:1px;
+
+    background:#e5e7eb;
+
+}
+
+.auth-divider::before{
+    left:0;
+}
+
+.auth-divider::after{
+    right:0;
+}
+
+.auth-footer{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+@keyframes popup{
+    from{
+        transform:scale(.9);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐱 MeowNest
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#cats">
+                Cats
+            </a>
+
+            <a href="#how">
+                How It Works
+            </a>
+
+        </nav>
+
+        <button id="openAuthBtn" class="login-btn">
+            Login
+        </button>
+
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                🐾 Trusted Cat Adoption Community
+            </span>
+
+            <h1>
+
+                Find Your New
+
+                <span>
+                    Best Friend
+                </span>
+
+                🐱
+
+            </h1>
+
+            <p>
+
+                Every cat deserves a loving home.
+
+                Discover, connect and adopt with confidence.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn">
+                    Explore Cats
+                </button>
+
+                <button class="secondary-btn">
+                    Join Community
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <div class="cat-circle">
+                🐱
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <h2>500+</h2>
+
+            <p>Cats Listed</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2>200+</h2>
+
+            <p>Happy Adoptions</p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2>100%</h2>
+
+            <p>Community Driven</p>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+
+    <section id="features" class="features">
+
+        <div class="section-heading">
+
+            <h2>
+                Why Choose MeowNest?
+            </h2>
+
+            <p>
+                Safe, simple and community powered.
+            </p>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🛡️
+                </div>
+
+                <h3>
+                    Verified Owners
+                </h3>
+
+                <p>
+                    Connect with trusted pet owners.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Loving Homes
+                </h3>
+
+                <p>
+                    Help cats find caring families.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Easy Adoption
+                </h3>
+
+                <p>
+                    Contact owners directly.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LATEST CATS -->
+
+    <section id="cats" class="latest-cats">
+
+        <div class="section-heading">
+
+            <h2>
+                Latest Cats
+            </h2>
+
+            <p>
+                Meet adorable cats waiting for a home.
+            </p>
+
+        </div>
+
+        <div id="catsContainer" class="cats-grid">
+
+        </div>
+
+    </section>
+
+    <!-- HOW IT WORKS -->
+
+    <section id="how" class="how-it-works">
+
+        <div class="section-heading">
+
+            <h2>
+                How Adoption Works
+            </h2>
+
+        </div>
+
+        <div class="steps">
+
+            <div class="step-card">
+
+                <h3>1</h3>
+
+                <p>
+                    Browse Cats
+                </p>
+
+            </div>
+        
+            <div class="step-card">
+
+                <h3>2</h3>
+
+                <p>
+                    Contact Owner
+                </p>
+
+            </div>
+
+            <div class="step-card">
+
+                <h3>3</h3>
+
+                <p>
+                    Give A Loving Home
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>
+            Ready To Change A Cat's Life?
+        </h2>
+
+        <p>
+
+            Join MeowNest and become part of a caring community.
+
+        </p>
+
+        <button class="primary-btn">
+
+            Get Started
+
+        </button>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            🐱 MeowNest
+        </h3>
+
+        <p>
+            Helping cats find forever homes.
+        </p>
+
+        <span>
+            © 2026 MeowNest
+        </span>
+
+    </footer>
+
+    <!-- AUTH MODAL -->
+
+    <div id="authModal" class="modal">
+
+        <div class="modal-content">
+
+            <button id="closeModal" class="close-btn">
+                ✕
+            </button>
+
+            <div class="auth-tabs">
+
+                <button id="loginTab">
+                    Login
+                </button>
+
+                <button id="registerTab">
+                    Register
+                </button>
+
+            </div>
+
+            <form id="authForm">
+
+            </form>
+
+        </div>
+
+    </div>
+<script>
+    
+
+const API = "https://meownest-backend.onrender.com";
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const authModal =
+document.getElementById("authModal");
+
+const openAuthBtn =
+document.getElementById("openAuthBtn");
+
+const closeModal =
+document.getElementById("closeModal");
+
+const loginTab =
+document.getElementById("loginTab");
+
+const registerTab =
+document.getElementById("registerTab");
+
+const authForm =
+document.getElementById("authForm");
+
+const catsContainer =
+document.getElementById("catsContainer");
+
+/* =========================
+   AUTO LOGIN CHECK
+========================= */
+
+const token =
+localStorage.getItem("token");
+
+if(token){
+
+window.location.href =
+"dashboard.html";
+
+}
+
+/* =========================
+   OPEN MODAL
+========================= */
+
+openAuthBtn.onclick = () => {
+
+authModal.style.display = "flex";
+
+showLogin();
+
+};
+
+/* =========================
+   CLOSE MODAL
+========================= */
+
+closeModal.onclick = () => {
+
+authModal.style.display = "none";
+
+};
+
+/* =========================
+   CLOSE OUTSIDE
+========================= */
+
+window.onclick = (e) => {
+
+if(e.target === authModal){
+
+authModal.style.display = "none";
+
+}
+
+};
+
+/* =========================
+   LOGIN FORM
+========================= */
+
+function showLogin(){
+
+authForm.innerHTML = `
+<div class="auth-header">
+
+<div class="auth-logo">
+🐱
+</div>
+
+<h2>Welcome Back</h2>
+
+<p>Login to continue your MeowNest journey</p>
+
+</div>
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Email Address"
+required
+>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+required
+>
+
+<button type="submit">
+Login
+</button>
+
+<div class="auth-footer">
+Helping cats find loving homes ❤️
+</div>
+
+`;
+
+authForm.onsubmit = loginUser;
+
+}
+
+/* =========================
+   REGISTER FORM
+========================= */
+
+function showRegister(){
+
+authForm.innerHTML = `
+
+<div class="auth-header">
+
+<div class="auth-logo">
+🐾
+</div>
+
+<h2>Create Account</h2>
+
+<p>Join the MeowNest community</p>
+
+</div>
+
+<input
+type="text"
+id="registerName"
+placeholder="Full Name"
+required
+>
+
+<input
+type="text"
+id="registerUsername"
+placeholder="Username"
+required
+>
+
+<input
+type="email"
+id="registerEmail"
+placeholder="Email Address"
+required
+>
+
+<div style="display:flex;gap:10px;">
+
+<input
+type="text"
+id="registerOtp"
+placeholder="Enter OTP"
+required
+style="flex:1;"
+>
+
+<button
+type="button"
+id="sendOtpBtn"
+style="
+width:auto;
+padding:0 18px;
+margin:0;
+"
+>
+Send OTP
+</button>
+
+</div>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Password"
+required
+>
+
+<button type="submit">
+Create Account
+</button>
+
+<div class="auth-footer">
+Start helping cats today 🐱
+</div>
+
+`;
+
+document
+.getElementById("sendOtpBtn")
+.onclick = sendOtp;
+
+authForm.onsubmit =
+registerUser;
+
+}
+
+
+
+/* =========================
+   SWITCH TABS
+========================= */
+
+loginTab.onclick = () => {
+
+loginTab.classList.add("active");
+registerTab.classList.remove("active");
+
+showLogin();
+
+};
+
+registerTab.onclick = () => {
+
+registerTab.classList.add("active");
+loginTab.classList.remove("active");
+
+showRegister();
+
+};
+
+async function sendOtp(){
+
+const email =
+document.getElementById(
+"registerEmail"
+).value.trim();
+
+if(!email){
+
+showAlert(
+"Enter email first"
+);
+
+return;
+
+}
+
+const btn =
+document.getElementById(
+"sendOtpBtn"
+);
+
+btn.disabled = true;
+btn.innerText = "Sending...";
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/auth/send-otp`,
+
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+email
+})
+
+}
+
+);
+
+const data =
+await response.json();
+
+showAlert(
+data.message
+);
+
+}catch(error){
+
+console.log(error);
+
+showAlert(
+"Failed to send OTP"
+);
+
+}
+
+btn.disabled = false;
+btn.innerText = "Send OTP";
+
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+async function registerUser(e){
+
+e.preventDefault();
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/auth/register`,
+
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+name:
+document.getElementById(
+"registerName"
+).value,
+
+username:
+document.getElementById(
+"registerUsername"
+).value,
+
+email:
+document.getElementById(
+"registerEmail"
+).value,
+
+password:
+document.getElementById(
+"registerPassword"
+).value,
+
+otp:
+document.getElementById(
+"registerOtp"
+).value
+
+})
+
+}
+
+);
+
+const data =
+await response.json();
+console.log(data);
+
+if(!data.success){
+
+showAlert(
+data.message ||
+"Registration Failed"
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"token",
+data.token
+);
+
+localStorage.setItem(
+"user",
+JSON.stringify(data.user)
+);
+
+showAlert(
+"Account Created Successfully"
+);
+
+window.location.href =
+"dashboard.html";
+
+}catch(error){
+
+console.log(error);
+
+showAlert("Server Error");
+
+}
+
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+async function loginUser(e){
+
+e.preventDefault();
+
+try{
+
+const response =
+await fetch(
+
+`${API}/api/auth/login`,
+
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+email:
+document.getElementById(
+"loginEmail"
+).value,
+
+password:
+document.getElementById(
+"loginPassword"
+).value
+
+})
+
+}
+
+);
+
+const data =
+await response.json();
+
+if(!data.success){
+
+showAlert(
+data.message ||
+"Login Failed"
+);
+
+return;
+
+}
+
+localStorage.setItem(
+"token",
+data.token
+);
+
+showAlert(
+"Login Successful"
+);
+
+window.location.href =
+"dashboard.html";
+
+}catch(error){
+
+console.log(error);
+
+showAlert("Server Error");
+
+}
+
+}
+
+/* =========================
+   LOAD CATS
+========================= */
+
+async function loadCats(){
+
+try{
+
+const response =
+await fetch(
+`${API}/api/cats`
+);
+
+const data =
+await response.json();
+
+catsContainer.innerHTML = "";
+
+data.cats
+.slice(0,6)
+.forEach(cat=>{
+
+catsContainer.innerHTML += `
+
+<div class="cat-card">
+
+<div class="cat-photo">
+
+${
+cat.images &&
+cat.images.length > 0
+
+?
+
+`<img
+src="${cat.images[0]}"
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+">`
+
+:
+
+"🐱"
+
+}
+
+</div>
+
+<div class="cat-content">
+
+<h3>
+${cat.name}
+</h3>
+
+<p>
+${cat.breed || "Unknown Breed"}
+</p>
+
+<p>
+📍 ${cat.city || "Unknown"}
+</p>
+
+<button
+onclick="
+viewCat(
+'${cat._id}'
+)
+"
+>
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+/* =========================
+   VIEW CAT
+========================= */
+
+function viewCat(id){
+
+localStorage.setItem(
+"selectedCat",
+id
+);
+
+window.location.href =
+"cat.html?id=" + id;
+
+}
+
+/* =========================
+   START
+========================= */
+
+showLogin();
+
+loadCats();
+
+
+</script>
+<div class="loader-overlay">
+<div class="loader"></div>
+</div>
+
+<script src="ui.js"></script>
+</body>
+
+</html>
