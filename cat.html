@@ -485,9 +485,8 @@ Views
 
 </div>
 
-                <span id="catCity">
-                    City
-                </span>
+                    
+               
 
             </div>
 
@@ -699,6 +698,25 @@ this.style.transform='translateY(0)';
 const API = "https://meownest-backend.onrender.com";
 
 const token = localStorage.getItem("token");
+
+
+/* =========================
+   CHANGE IMAGE
+========================= */
+
+function changeImage(image, element){
+
+catImage.src = image;
+
+document
+.querySelectorAll("#thumbnailContainer img")
+.forEach(img=>{
+img.classList.remove("active-thumb");
+});
+
+element.classList.add("active-thumb");
+
+}
 
 /* =========================
    GET CAT ID
